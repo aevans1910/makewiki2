@@ -39,5 +39,5 @@ class PageCreateView(CreateView):
     form = PageForm(request.POST)
     if form.is_valid():
       page = form.save()
-      return HttpResponseRedirect(reverse_lazy('page:detail', args=[page.id]))
+      return HttpResponseRedirect(reverse_lazy('wiki-list-page'))
     return render(request, 'wiki/new.html', {'form':form})
