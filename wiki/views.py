@@ -15,7 +15,7 @@ class PageListView(ListView):
     def get(self, request):
         """ GET a list of Pages. """
         pages = self.get_queryset().all()
-        return render(request, 'list.html', {
+        return render(request, 'wiki/list.html', {
           'pages': pages
         })
 
@@ -33,11 +33,11 @@ class PageDetailView(DetailView):
 class PageCreateView(CreateView):
   def get(self, request, *args, **kwargs):
     context = {'form': PageForm()}
-    return render(request, 'books/new.html', context)
+    return render(request, 'wiki/new.html', context)
 
   def post(self, request, *args, **kwargs):
     form = PageForm(request.POST)
     if form.is_valid():
       page = form.save()
       return HttpResponseRedirect(reverse_lazy('page:detail', args=[page.id]))
-    return render(request, 'page/new.html', {'form':form})
+    return render(request, 'wiki/new.html', {'form':form})
