@@ -22,15 +22,15 @@ class PageDetail(APIView):
         page = get_object_or_404(Page, pk=pk)
         page.delete()
 
+    def put(self, request, pk):
+        page = get_object_or_404(Page, pk=pk)
+        form = PageForm(request.POST)
+        data = PageSerializer(form).data
+        return Response(data)
+
 class PageCreate(APIView):
     def post(self, request):
         form = PageForm(request.POST)
         data = PageSerializer(form).data
         return Response(data)
 
-class PageUpdate(APIView):
-    def put(self, request, pk):
-        page = get_object_or_404(Page, pk=pk)
-        form = PageForm(request.POST)
-        data = PageSerializer(form).data
-        return Response(data)
